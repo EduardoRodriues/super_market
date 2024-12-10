@@ -1,62 +1,43 @@
-package br.com.carlosrodrigues.super_market.core.models.models_produtos;
+package br.com.carlosrodrigues.super_market.web.dtos.dtos_servicos;
 
 import java.math.BigDecimal;
+
 import br.com.carlosrodrigues.super_market.core.enums.Boleano;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = true)
-@ToString(onlyExplicitlyIncluded = true)
-public class AlimentosFrescos extends Produto{
-
-    @Id
-    @ToString.Include
-    @EqualsAndHashCode.Include
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@ToString
+@EqualsAndHashCode(callSuper = false)
+public class AlimentosFrescosForm extends ProdutoForm{
     
-    @Column(name = "preco_por_unidade", nullable = false)
+    @PositiveOrZero
+    @NotNull
     private BigDecimal precoPorUnidade;
 
-    @Column(name = "peso", nullable = false)
+    @PositiveOrZero
+    @NotNull
     private BigDecimal peso;
 
-    @Column(name = "origem", nullable = false)
+    @NotEmpty
     private String origem;
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
     private Boleano organico;
 
-    @Column(name = "aroma", nullable = false)
+    @NotEmpty
     private String aroma;
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
     private Boleano higienizado;
 
-    @Column(name = "nivel_frescor", nullable = false)
+    @PositiveOrZero
+    @NotNull
     private int nivelFrescor;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public BigDecimal getPrecoPorUnidade() {
 		return precoPorUnidade;
